@@ -1,12 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native'
+//import { ApolloClient } from 'apollo-boost';
+import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
+import HomePage from './src/HomePage'
+
+const client = new ApolloClient({
+  uri: 'http://192.168.0.7:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
+  cache: new InMemoryCache()
+})
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <ApolloProvider client={client}>
+       <View style={styles.container}>
+      <Text style={styles.title}>Tituloooooo</Text>
+      <HomePage/> 
     </View>
+    </ApolloProvider>
   );
 }
 
