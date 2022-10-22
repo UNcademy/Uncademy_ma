@@ -10,7 +10,7 @@ import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
-import { useQuery } from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import { login } from "../gql/queries";
 
 const { width, height } = Dimensions.get("screen");
@@ -19,21 +19,20 @@ export default function Login (props){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const { navigation } = props;
-    const loginFunction = e => {
-      e.preventDefault()
-      const {data, loading} = useQuery(login, {
-        variables: {
-          "username": username, 
-          "password": password
-        }
-      }) 
-      if (loading){
-        console.log("cargando")
-      }else{
+
+    /*{mirar errores}*/
+    const {data, loading, refetch} = useQuery(login, {
+      variables: {
+        "username": username, 
+        "password": password
+      },
+      enabled:false,
+      onCompleted:(data) => {
         console.log(data)
         navigation.navigate("Home")
       }
-    }
+    }) 
+    
     return (
       <Block flex middle>
         <StatusBar hidden />
@@ -89,7 +88,11 @@ export default function Login (props){
                       />
                     </Block>
                     <Block middle>
-                      <Button color="primary" style={styles.createButton} onPress={loginFunction}>
+                      <Button color="primary" style={styles.createButton} onPress={() => {
+                        
+                        console.log(username)
+                        refetch()
+                      }}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           INICIAR SESIÓN
                         </Text>

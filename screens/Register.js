@@ -16,9 +16,9 @@ import { useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 
-class Register extends React.Component {
-  render() {
-    const { navigation } = this.props;
+export default function Register (props){
+  const [checked, setChecked] = useState(false)
+  const { navigation } = props;
     
     return (
       <Block flex middle>
@@ -229,6 +229,7 @@ class Register extends React.Component {
                         checkboxStyle={{
                           borderWidth: 3
                         }}
+                        onChange={newChecked => setChecked(newChecked)}
                         color={argonTheme.COLORS.PRIMARY}
                         label="¿Tienes tarjeta militar?"
                       />
@@ -306,4 +307,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Register;
