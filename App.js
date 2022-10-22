@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
-//import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
 import HomePage from './src/HomePage'
+
 
 const client = new ApolloClient({
   uri: 'http://192.168.0.7:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
@@ -11,10 +11,10 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-       <View style={styles.container}>
-      <Text style={styles.title}>Tituloooooo</Text>
-      <HomePage/> 
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.title}>App.js</Text>
+        <HomePage/> 
+      </View>
     </ApolloProvider>
   );
 }

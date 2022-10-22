@@ -3,14 +3,13 @@ import { searchAllSubjects } from './gql/Query';
 import { useQuery } from "@apollo/client";
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, FlatList} from 'react-native'
+import Search from './screens/Search';
 
 
 
-export default function HomePage() {
+export default function HomePage() {/*
 
     const { data, loading } = useQuery(searchAllSubjects);
-
-    console.log(data)
 
     const SubjectItem = ({ subject }) => {
         const { nombre } = subject; //get the name of subject
@@ -32,7 +31,13 @@ export default function HomePage() {
           renderItem={({ item }) => <SubjectItem subject={item} />}
           keyExtractor={(item, index) => index}
         />
-    );
+    );*/
+
+    return(
+      <View>
+        <Search/>
+      </View>
+    )
 }
 
   
