@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -10,12 +10,30 @@ import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
+import { useQuery } from "@apollo/client";
+import { login } from "../gql/queries";
 
 const { width, height } = Dimensions.get("screen");
 
-class Login extends React.Component {
-  render() {
-    const { navigation } = this.props;
+export default function Login (props){
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const { navigation } = props;
+    const loginFunction = e => {
+      e.preventDefault()
+      const {data, loading} = useQuery(login, {
+        variables: {
+          "username": username, 
+          "password": password
+        }
+      }) 
+      if (loading){
+        console.log("cargando")
+      }else{
+        console.log(data)
+        navigation.navigate("Home")
+      }
+    }
     return (
       <Block flex middle>
         <StatusBar hidden />
@@ -40,6 +58,7 @@ class Login extends React.Component {
                       <Input
                         borderless
                         placeholder="Usuario institucional"
+                        onChangeText={newUsername => setUsername(newUsername)}
                         iconContent={
                           <Icon
                             size={17}
@@ -57,6 +76,7 @@ class Login extends React.Component {
                         password
                         borderless
                         placeholder="Contraseña"
+                        onChangeText={newPassword => setPassword(newPassword)}
                         iconContent={
                           <Icon
                             size={17}
@@ -69,7 +89,7 @@ class Login extends React.Component {
                       />
                     </Block>
                     <Block middle>
-                      <Button color="primary" style={styles.createButton} onPress={() => navigation.navigate("Home")}>
+                      <Button color="primary" style={styles.createButton} onPress={loginFunction}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           INICIAR SESIÓN
                         </Text>
@@ -82,7 +102,6 @@ class Login extends React.Component {
         </ImageBackground>
       </Block>
     );
-  }
 }
 
 const styles = StyleSheet.create({
@@ -133,4 +152,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;

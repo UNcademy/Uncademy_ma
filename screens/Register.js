@@ -5,19 +5,21 @@ import {
   Dimensions,
   StatusBar,
   KeyboardAvoidingView,
-  ScrollView 
+  ScrollView
 } from "react-native";
 
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
+import { useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 
 class Register extends React.Component {
   render() {
     const { navigation } = this.props;
+    
     return (
       <Block flex middle>
         <StatusBar hidden />
@@ -45,13 +47,7 @@ class Register extends React.Component {
                         borderless
                         placeholder="Nombre de usuario (correo UNAL)"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="hat-3"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
                       />
                     </Block>
@@ -61,13 +57,7 @@ class Register extends React.Component {
                         borderless
                         placeholder="Contraseña"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="padlock-unlocked"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
                       />
                     </Block>
@@ -77,13 +67,7 @@ class Register extends React.Component {
                         borderless
                         placeholder="Nombre Completo "
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
                       />
                     </Block>
@@ -91,15 +75,9 @@ class Register extends React.Component {
                     <Block width={width * 0.8} style={{ marginBottom: 2 }}>
                       <Input
                         borderless
-                        placeholder="Numero de Documento "
+                        placeholder="Número de Documento "
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
                       />
                     </Block>
@@ -109,14 +87,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Departamento de expedición del documento"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -125,14 +98,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Ciudad de expedición del documento "
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -141,30 +109,20 @@ class Register extends React.Component {
                         borderless
                         placeholder="Género"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
                     <Block width={width * 0.8} style={{ marginBottom: 2 }}>
                       <Input
                         borderless
-                        placeholder="Correo"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                        placeholder="Correo"iconContent={
+                          <Icon/>
                         }
+
+                        
                       />
                     </Block>
 
@@ -173,14 +131,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Correo UNAL"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -189,14 +142,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Lugar de nacimiento"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -205,14 +153,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Celular"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -221,14 +164,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Teléfono"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -237,14 +175,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Edad"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -253,14 +186,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="País de nacimiento"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -269,14 +197,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Tipo de sangre y factor RH"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
 
@@ -285,94 +208,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Dirección"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Tarjeta militar"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Nombre de la madre"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Documento de la madre"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Nombre del padre"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Documento del padre"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
+                        
                       />
                     </Block>
 
@@ -381,14 +219,9 @@ class Register extends React.Component {
                         borderless
                         placeholder="Programa académico"
                         iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="ic_mail_24px"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
+                          <Icon/>
                         }
+                        
                       />
                     </Block>
                     <Block row width={width * 0.75}>
@@ -397,18 +230,8 @@ class Register extends React.Component {
                           borderWidth: 3
                         }}
                         color={argonTheme.COLORS.PRIMARY}
-                        label="Acepto los términos"
+                        label="¿Tienes tarjeta militar?"
                       />
-                      <Button
-                        style={{ width: 100 }}
-                        color="transparent"
-                        textStyle={{
-                          color: argonTheme.COLORS.PRIMARY,
-                          fontSize: 14
-                        }}
-                      >
-                        Términos y condiciones
-                      </Button>
                     </Block>
                     <Block middle>
                       <Button color="primary" style={styles.createButton} onPress={() => navigation.navigate("Login")}>
@@ -470,7 +293,7 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   inputIcons: {
-    marginRight: 12
+    marginRight: 5
   },
   passwordCheck: {
     paddingLeft: 15,

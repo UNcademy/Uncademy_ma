@@ -13,14 +13,16 @@ function CustomDrawerContent({
   state,
   ...rest
 }) {
-  const screens = ["Profile", "Account"];
+  const screens = ["Profile"];
   return (
     <Block
       style={styles.container}
       forceInset={{ top: "always", horizontal: "never" }}
     >
-      <Block flex={0.06} style={styles.header}>
-        <Image styles={styles.logo} source={Images.Logo} />
+      <Block flex={0.05} style={styles.header}>
+        <Text color="#8898AA" size={18}>
+          Bienvenidos a UNcademy!
+        </Text>
       </Block>
       <Block flex style={{ paddingLeft: 8, paddingRight: 14 }}>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
