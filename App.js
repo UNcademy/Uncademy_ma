@@ -64,20 +64,4 @@ export const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: "lightgrey"
   },
-  list__container: {
-    margin: 10,
-    height: "85%",
-    width: "100%",
-  },
-  item_list: {
-    margin: 30,
-    borderBottomWidth: 2,
-    borderBottomColor: "lightgrey"
-  },
-  title_list: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 5,
-    fontStyle: "italic",
-  },
 });

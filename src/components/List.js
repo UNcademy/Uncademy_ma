@@ -49,7 +49,7 @@ const List = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.list__container}>
+    <SafeAreaView style={styles.container}>
       <View onStartShouldSetResponder={() => {props.setClicked(false);}}>
         <FlatList
           data={props.data.searchAllSubjects}
