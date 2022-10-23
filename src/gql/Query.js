@@ -9,3 +9,18 @@ query searchAllSubjects {
     }
   }
 `;
+
+export const searchSubjectByCode = gql `
+query searchSubjectByCode($courseCode : String!) {
+  searchSubjectByCode(courseCode:$courseCode){
+      nombre
+      descripcion
+      codigoMateria
+      creditos
+      cupos
+      tipologia
+      prerequisitos
+    }
+  }
+`;
+
