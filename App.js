@@ -4,7 +4,7 @@ import HomePage from './src/HomePage'
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
+  uri: 'http://192.168.0.7:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
   cache: new InMemoryCache()
 })
 

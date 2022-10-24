@@ -2,6 +2,8 @@ import {React, useState} from "react";
 import { Text, View, FlatList, SafeAreaView, Pressable } from "react-native";
 import ModalSubject from "./ModalSubject";
 import { styles } from "../../App"
+import { searchSubjectByCode } from "../gql/Query";
+import { useQuery } from "@apollo/client";
 
 
 // definition of the Item, which will be rendered in the FlatList
@@ -18,7 +20,21 @@ const Item = ({ nombre, descripcion, codigoMateria }) => (
 const List = (props) => {
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [codigoMateria, setcodigoMateria] = useState("");
+  const [codigoMateria, setcodigoMateria] = useState("2015734");
+
+  const {data, loading} =  useQuery(searchSubjectByCode, {
+    variables: {
+        courseCode: codigoMateria
+    },
+    });
+
+    if(loading){
+      return(
+        <Text>
+          Cargando...
+        </Text>
+      )
+    }
 
   const RenderItem = ({ item }) => {
 
@@ -34,7 +50,7 @@ const List = (props) => {
     if (item.nombre.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
       return(
         <Pressable style={styles.item} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
-          <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>;
+          <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
         </Pressable>
       ) 
     }
@@ -56,7 +72,7 @@ const List = (props) => {
           renderItem={({ item }) => <RenderItem item ={item} />}
           keyExtractor={(item, index) => index}
         />
-        <ModalSubject data={codigoMateria} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+        <ModalSubject data={data} modalVisible={modalVisible} setModalVisible={setModalVisible}/>
       </View>
     </SafeAreaView>
   );
