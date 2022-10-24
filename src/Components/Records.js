@@ -29,8 +29,8 @@ function Records() {
                     {records.map((val) => {
                         return (
                             <View style={styles.item}>
-                                <Text> Semestre: {val.semestre} 
-                                <Text>{'          '}</Text>
+                                <Text style={styles.columnRow}> Semestre: {val.semestre} 
+                                <Text style={styles.columnRow}>{'          '}</Text>
                                 Avance: {val.avance}</Text>
                                 <ItemDivider></ItemDivider>
                             </View>
@@ -52,25 +52,32 @@ const ItemDivider = () => {
         style={{
           height: 1,
           width: "100%",
-          backgroundColor: "#492A55",
+          backgroundColor: "#000000",
+          marginTop: 8,
         }}
       />
     );
-  }
+}
 
 
 const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#A61414',
+        backgroundColor: '#A61000',
         borderRadius: 10,
     },
     item: {
         padding: 10,
         fontSize: 15,
         marginBottom: 2,
-    }
+    },
+    columnRow: {
+        flex: 1,
+        textAlign: "center",
+        justifyContent: "space-evenly",
+        marginTop: 2,
+      },
 });
 
 export default Records;

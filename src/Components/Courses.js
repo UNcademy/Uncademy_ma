@@ -50,11 +50,11 @@ function Courses() {
                             <View style={styles.item}>
                                 
                                 <Text> 
-                                    Nombre: {val.nombre}
-                                    <Text>{'              '}</Text>
-                                    Tipologia: {val.tipologia}
-                                    <Text>{'              '}</Text>
-                                    Creditos: {val.creditos}
+                                    <Text style={styles.columnRow}> Nombre: {val.nombre} </Text>
+                                    <Text style={styles.columnRow}>{'              '}</Text>
+                                    <Text style={styles.columnRow}> Tipologia: {val.tipologia} </Text>
+                                    <Text style={styles.columnRow}>{'                 '}</Text>
+                                    <Text style={styles.columnRow}> Creditos: {val.creditos} </Text>
                                     <Text>{'                      '}</Text>
                                     Nota: {val.nota}
                                 </Text>
@@ -75,13 +75,14 @@ function Courses() {
 
 const ItemDivider = () => {
     return (
-        <View
-            style={{
-                height: 1,
-                width: "100%",
-                backgroundColor: "#492A55",
-            }}
-        />
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#000000",
+          marginTop: 8,
+        }}
+      />
     );
 }
 
@@ -90,15 +91,21 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#A61414',
+        backgroundColor: '#A61000',
         borderRadius: 10,
         textAlign:'center'
     },
     item: {
-        padding: 5,
+        padding: 10,
         fontSize: 15,
-        marginBottom: 3,
-    }
+        marginBottom: 2,
+    },
+    columnRow: {
+        flex: 1,
+        textAlign: "center",
+        justifyContentnt: "space-evenly",
+        marginTop: 2,
+      },
 });
 //export default Courses({id: "string"});
 export default Courses;

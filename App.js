@@ -56,7 +56,8 @@ export const styles = StyleSheet.create({
     paddingTop:50,
     paddingLeft:20,
     paddingRight: 20,
-    backgroundColor: '#033B86',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
   },
   item: {
     paddingTop: 16,
@@ -70,7 +71,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     fontWeight: 'bold',
-    fontSize: 16
+    fontSize: 18
   },
   title:{
     fontWeight: 'bold',
