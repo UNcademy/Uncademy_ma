@@ -26,124 +26,29 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function ElementsStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Elements"
-        component={Elements}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Elements" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
-function ArticlesStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Articles"
-        component={Articles}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
 function ProfileStack(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Profile"
+      initialRouteName="Perfil"
       screenOptions={{
         mode: "card",
         headerShown: "screen",
       }}
     >
       <Stack.Screen
-        name="Profile"
+        name="Perfil"
         component={Profile}
         options={{
           header: ({ navigation, scene }) => (
             <Header
               transparent
               white
-              title="Profile"
+              title="Perfil"
               navigation={navigation}
               scene={scene}
             />
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
           headerTransparent: true,
         }}
       />
@@ -228,7 +133,7 @@ export default function OnboardingStack(props) {
         }}
       />
       <Stack.Screen name="Home" component={AppStack} />
-      
+      <Stack.Screen name="Cerrar sesión" component={Login} />
     </Stack.Navigator>
   );
 }
@@ -272,29 +177,15 @@ function AppStack(props) {
         }}
       />
       <Drawer.Screen
-        name="Profile"
+        name="Perfil"
         component={ProfileStack}
         options={{
           headerShown: false,
         }}
       />
       <Drawer.Screen
-        name="Account"
-        component={Register}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="Elements"
-        component={ElementsStack}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Drawer.Screen
-        name="Articles"
-        component={ArticlesStack}
+        name="Cerrar sesión"
+        component={OnboardingStack}
         options={{
           headerShown: false,
         }}

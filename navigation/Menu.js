@@ -13,7 +13,7 @@ function CustomDrawerContent({
   state,
   ...rest
 }) {
-  const screens = ["Profile"];
+  const screens = ["Perfil", "Cerrar sesión"];
   return (
     <Block
       style={styles.container}

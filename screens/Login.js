@@ -4,13 +4,15 @@ import {
   ImageBackground,
   Dimensions,
   StatusBar,
-  KeyboardAvoidingView
+  KeyboardAvoidingView, 
+  Alert
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
+
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
-import { useQuery} from "@apollo/client";
+import { useLazyQuery} from "@apollo/client";
 import { login } from "../gql/queries";
 
 const { width, height } = Dimensions.get("screen");
@@ -18,18 +20,23 @@ const { width, height } = Dimensions.get("screen");
 export default function Login (props){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const [usernameError, setUsernameError] = useState("")
+    const [passwordError, setPasswordError] = useState("")
     const { navigation } = props;
 
     /*{mirar errores}*/
-    const {data, loading, refetch} = useQuery(login, {
+    const [runQuery, {data, loading, error}] = useLazyQuery(login, {
       variables: {
-        "username": username, 
-        "password": password
+        username: username, 
+        password: password
       },
       enabled:false,
       onCompleted:(data) => {
-        console.log(data)
-        navigation.navigate("Home")
+        if (data.login.statusCode == 200){
+          navigation.navigate("Home")
+        }       
+                  
       }
     }) 
     
@@ -56,7 +63,7 @@ export default function Login (props){
                     <Block width={width * 0.8} style={{marginBottom: 10 }}>
                       <Input
                         borderless
-                        placeholder="Usuario institucional"
+                        placeholder="Usuario UNAL"
                         onChangeText={newUsername => setUsername(newUsername)}
                         iconContent={
                           <Icon
@@ -68,6 +75,7 @@ export default function Login (props){
                           />
                         }
                       />
+                     
                     </Block>
                     
                     <Block width={width * 0.8}>
@@ -86,12 +94,12 @@ export default function Login (props){
                           />
                         }
                       />
+                    
                     </Block>
                     <Block middle>
                       <Button color="primary" style={styles.createButton} onPress={() => {
+                        runQuery()
                         
-                        console.log(username)
-                        refetch()
                       }}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           INICIAR SESIÓN

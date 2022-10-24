@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   StyleSheet,
   ImageBackground,
@@ -12,14 +12,63 @@ import { Block, Checkbox, Text, theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
-import { useState } from "react";
+import { useMutation} from "@apollo/client";
+import { register } from "../gql/queries";
 
 const { width, height } = Dimensions.get("screen");
 
 export default function Register (props){
-  const [checked, setChecked] = useState(false)
+  const [user_name, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [user_type, setUserType] = useState("")
+  const [full_name, setFullName] = useState("")
+  const [document, setDocument] = useState("")
+  const [dep_document, setDepDocument] = useState("")
+  const [city_document, setCityDocument] = useState("")
+  const [genre, setGenre] = useState("")
+  const [email, setEmail] = useState("")
+  const [un_mail, setUNMail] = useState("")
+  const [birth_place, setBirthPlace] = useState("")
+  const [cel, setCel] = useState("")
+  const [age, setAge] = useState("")
+  const [country, setCountry] = useState("")
+  const [blood_type, setBloodType] = useState("")
+  const [address, setAddress] = useState("")
+  const [army_card, setArmyCard] = useState(false)
+  const [program, setProgram] = useState("")
   const { navigation } = props;
-    
+
+  /*{mirar errores}*/
+  const [runMutation, {data, loading, error}] = useMutation(register, {
+    variables: {
+      "user_name": user_name, 
+      "password": password,
+      "user_type": user_type,
+      "full_name": full_name,
+      "document": document,
+      "dep_document": dep_document,
+      "city_document": city_document,
+      "genre": genre,
+      "email": email,
+      "un_mail": un_mail,
+      "birth_place": birth_place,
+      "cel": cel,
+      "age": age,
+      "country": country,
+      "blood_type": blood_type,
+      "address": address,
+      "army_card": army_card,
+      "program": program
+    },
+    enabled:false,
+    onCompleted:(data) => {
+      if (data.register.statusCode == 201){
+        navigation.navigate("Home")
+      }else{
+        console.log(data.register.statusCode)
+      }
+    }
+  }) 
     return (
       <Block flex middle>
         <StatusBar hidden />
@@ -46,6 +95,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Nombre de usuario (correo UNAL)"
+                        onChangeText={newUsername => setUsername(newUsername)}
                         iconContent={
                           <Icon/>
                         }
@@ -56,6 +106,18 @@ export default function Register (props){
                         password
                         borderless
                         placeholder="Contraseña"
+                        onChangeText={newPassword => setPassword(newPassword)}
+                        iconContent={
+                          <Icon/>
+                        }
+                      />
+                    </Block>
+
+                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
+                      <Input
+                        borderless
+                        placeholder="¿Eres Estudiante, profesor o ambos?"
+                        onChangeText={newUserType => setUserType(newUserType)}
                         iconContent={
                           <Icon/>
                         }
@@ -66,6 +128,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Nombre Completo "
+                        onChangeText={newFullName => setFullName(newFullName)}
                         iconContent={
                           <Icon/>
                         }
@@ -76,6 +139,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Número de Documento "
+                        onChangeText={newDocument => setDocument(newDocument)}
                         iconContent={
                           <Icon/>
                         }
@@ -86,6 +150,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Departamento de expedición del documento"
+                        onChangeText={newDepDocument => setDepDocument(newDepDocument)}
                         iconContent={
                           <Icon/>
                         }
@@ -97,6 +162,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Ciudad de expedición del documento "
+                        onChangeText={newCityDocument => setCityDocument(newCityDocument)}
                         iconContent={
                           <Icon/>
                         }
@@ -108,6 +174,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Género"
+                        onChangeText={newGenre => setGenre(newGenre)}
                         iconContent={
                           <Icon/>
                         }
@@ -118,7 +185,9 @@ export default function Register (props){
                     <Block width={width * 0.8} style={{ marginBottom: 2 }}>
                       <Input
                         borderless
-                        placeholder="Correo"iconContent={
+                        placeholder="Correo"
+                        onChangeText={newEmail => setEmail(newEmail)}
+                        iconContent={
                           <Icon/>
                         }
 
@@ -130,6 +199,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Correo UNAL"
+                        onChangeText={newUNMail=> setUNMail(newUNMail)}
                         iconContent={
                           <Icon/>
                         }
@@ -141,6 +211,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Lugar de nacimiento"
+                        onChangeText={newBirthPlace => setBirthPlace(newBirthPlace)}
                         iconContent={
                           <Icon/>
                         }
@@ -152,17 +223,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Celular"
-                        iconContent={
-                          <Icon/>
-                        }
-                        
-                      />
-                    </Block>
-
-                    <Block width={width * 0.8} style={{ marginBottom: 2 }}>
-                      <Input
-                        borderless
-                        placeholder="Teléfono"
+                        onChangeText={newCel => setCel(newCel)}
                         iconContent={
                           <Icon/>
                         }
@@ -174,6 +235,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Edad"
+                        onChangeText={newAge => setAge(newAge)}
                         iconContent={
                           <Icon/>
                         }
@@ -185,6 +247,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="País de nacimiento"
+                        onChangeText={newCountry => setCountry(newCountry)}
                         iconContent={
                           <Icon/>
                         }
@@ -196,6 +259,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Tipo de sangre y factor RH"
+                        onChangeText={newBloodType => setBloodType(newBloodType)}
                         iconContent={
                           <Icon/>
                         }
@@ -207,6 +271,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Dirección"
+                        onChangeText={newAddress => setAddress(newAddress)}
                         iconContent={
                           <Icon/>
                         }
@@ -218,6 +283,7 @@ export default function Register (props){
                       <Input
                         borderless
                         placeholder="Programa académico"
+                        onChangeText={newProgram => setProgram(newProgram)}
                         iconContent={
                           <Icon/>
                         }
@@ -229,13 +295,16 @@ export default function Register (props){
                         checkboxStyle={{
                           borderWidth: 3
                         }}
-                        onChange={newChecked => setChecked(newChecked)}
+                        onChange={newArmyCard => setArmyCard(newArmyCard)}
                         color={argonTheme.COLORS.PRIMARY}
                         label="¿Tienes tarjeta militar?"
                       />
                     </Block>
                     <Block middle>
-                      <Button color="primary" style={styles.createButton} onPress={() => navigation.navigate("Login")}>
+                      <Button color="primary" style={styles.createButton} onPress={() => {
+                        console.log(user_name)
+                        runMutation()
+                      }}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
                           CREAR CUENTA
                         </Text>
@@ -251,7 +320,6 @@ export default function Register (props){
       </Block>
       
     );
-  }
 }
 
 const styles = StyleSheet.create({
