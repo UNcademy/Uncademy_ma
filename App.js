@@ -64,4 +64,9 @@ export const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: "lightgrey"
   },
+  item_list: {
+    margin: 30,
+    borderBottomWidth: 5,
+    borderBottomColor: "lightgrey"
+  },
 });

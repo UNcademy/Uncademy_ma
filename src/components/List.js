@@ -41,7 +41,7 @@ const List = (props) => {
     // when no input, show all
     if (props.searchPhrase === "") {
       return(
-      <Pressable style={styles.item} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
+      <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
         <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
       </Pressable>
       ) 
@@ -49,7 +49,7 @@ const List = (props) => {
     // filter of the name
     if (item.nombre.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
       return(
-        <Pressable style={styles.item} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
+        <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
           <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
         </Pressable>
       ) 
@@ -57,8 +57,8 @@ const List = (props) => {
     // filter of the description
     if (item.descripcion.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
       return(
-        <Pressable style={styles.item} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
-          <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>;
+        <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
+          <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
         </Pressable>
       ) 
     }
