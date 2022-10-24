@@ -55,7 +55,8 @@ export const styles = StyleSheet.create({
   container: {
     paddingTop:50,
     paddingLeft:20,
-    paddingRight: 20
+    paddingRight: 20,
+    backgroundColor: '#033B86',
   },
   item: {
     paddingTop: 16,

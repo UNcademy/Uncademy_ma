@@ -29,7 +29,7 @@ function Records() {
                     {records.map((val) => {
                         return (
                             <View style={styles.item}>
-                                <Text> Id: {val.userId} 
+                                <Text> Semestre: {val.semestre} 
                                 <Text>{'          '}</Text>
                                 Avance: {val.avance}</Text>
                                 <ItemDivider></ItemDivider>
@@ -52,7 +52,7 @@ const ItemDivider = () => {
         style={{
           height: 1,
           width: "100%",
-          backgroundColor: "#607D8B",
+          backgroundColor: "#492A55",
         }}
       />
     );
@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
+        backgroundColor: '#A61414',
+        borderRadius: 10,
     },
     item: {
         padding: 10,

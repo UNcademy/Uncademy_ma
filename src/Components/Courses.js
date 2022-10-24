@@ -44,7 +44,6 @@ function Courses() {
     return (
         <View>
             <ScrollView>
-                <Text>Nombre</Text>
                 <View style={styles.container}>
                     {materias.map((val) => {
                         return (
@@ -52,12 +51,12 @@ function Courses() {
                                 
                                 <Text> 
                                     Nombre: {val.nombre}
-                                    <Text>{'          '}</Text>
+                                    <Text>{'              '}</Text>
                                     Tipologia: {val.tipologia}
-                                    <Text>{'          '}</Text>
-                                    creditos: {val.creditos}
-                                    <Text>{'          '}</Text>
-                                    nota: {val.nota}
+                                    <Text>{'              '}</Text>
+                                    Creditos: {val.creditos}
+                                    <Text>{'                      '}</Text>
+                                    Nota: {val.nota}
                                 </Text>
                                 <ItemDivider></ItemDivider>
                             </View>
@@ -80,7 +79,7 @@ const ItemDivider = () => {
             style={{
                 height: 1,
                 width: "100%",
-                backgroundColor: "#607D8B",
+                backgroundColor: "#492A55",
             }}
         />
     );
@@ -91,11 +90,14 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
+        backgroundColor: '#A61414',
+        borderRadius: 10,
+        textAlign:'center'
     },
     item: {
-        padding: 10,
+        padding: 5,
         fontSize: 15,
-        marginBottom: 2,
+        marginBottom: 3,
     }
 });
 //export default Courses({id: "string"});
