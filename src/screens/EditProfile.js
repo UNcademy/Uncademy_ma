@@ -1,30 +1,53 @@
 import React from 'react'
 import { View, Text, Button, StyleSheet, ScrollView, TextInput} from 'react-native'
 import TopBar from '../components/TopBar'
-import { viewProfile } from "../gql/Query";
+import { updateProfile, viewProfile } from "../gql/Query";
 import { useQuery, useMutation } from "@apollo/client";
 
 export default function EditProfile(props) {
-    const { navigation } = props;
+    const { route, navigation } = props;
+    const {DATA} = route.params
 
     const username = 'dzambranob'
-    const { data, loading, error } = useQuery(viewProfile, {
+/*     const { data, loading, error } = useQuery(viewProfile, {
         variables:{
           username:username
         }
       });
-    
-      if (loading) {
+
+    if (loading) {
+    return <Text>Obteniendo datos...</Text> //while loading return this
+    }
+    if (error) {
+    return <Text>Error obteniendo los datos, error: {error}</Text>
+    }
+    const DATA = data.viewProfile.data */
+    const [email, onChangeEmail] = React.useState(DATA.Email);
+    const [phone, onChangePhone] = React.useState(DATA.Cel.toString());
+    const [tel, onChangeTel] = React.useState(DATA.Tel.toString());
+    const [address, onChangeAddress] = React.useState(DATA.Address)
+
+    const [runMutation, {loading,error}] = useMutation(updateProfile,{
+        variables:{
+            username:username,
+            Email: email,
+            Cel: phone,
+            Tel: tel,
+            Address: address
+        },
+        onCompleted:()=>{
+            navigation.navigate('HomePage')
+        }
+    })
+
+    if (loading) {
         return <Text>Obteniendo datos...</Text> //while loading return this
-      }
-      if (error) {
-        return <Text>Error obteniendo los datos, error: {error}</Text>
-      }
-      const DATA = data.viewProfile.data
-      const [email, onChangeEmail] = React.useState(DATA.Email);
-      const [phone, onChangePhone] = React.useState(DATA.Cel.toString());
-      const [tel, onChangeTel] = React.useState(DATA.Tel.toString());
-      const [address, onChangeAddress] = React.useState(DATA.Address)
+        }
+    if (error) {
+        console.log(error)
+    return <Text>Error obteniendo los datos</Text>
+    }
+
     return (
         <View style={styles.container}>
         <TopBar navigation = {navigation}/>
@@ -36,7 +59,7 @@ export default function EditProfile(props) {
                 </Text>
             <Button
                 title="Guardar Cambios"
-                onPress={() => navigation.navigate('Profile')}
+                onPress={() => runMutation()}
             />
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>

@@ -11,7 +11,8 @@ const username = 'dzambranob'
 const { data, loading, error } = useQuery(viewProfile, {
     variables:{
       username:username
-    }
+    },
+    fetchPolicy:'network-only'
   });
 
   if (loading) {
@@ -19,7 +20,8 @@ const { data, loading, error } = useQuery(viewProfile, {
   }
 
   if (error) {
-    return <Text>Error obteniendo los datos, error: {error}</Text>
+    console.log(error)
+    return <Text>Error obteniendo los datos</Text>
   }
   const DATA = data.viewProfile.data
   return (
@@ -33,7 +35,7 @@ const { data, loading, error } = useQuery(viewProfile, {
             </Text>
           <Button
             title="Editar perfil"
-            onPress={() => navigation.navigate('EditProfile')}
+            onPress={() => navigation.navigate('EditProfile', {DATA: DATA})}
           />
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>

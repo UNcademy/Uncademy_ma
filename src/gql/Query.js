@@ -39,7 +39,7 @@ query viewProfile($username : String!) {
 
 export const updateProfile = gql `
 mutation updateProfile($username:String!, $Email:String!, $Cel:Float!, $Tel:Float!, $Address:String!){
-  updateProfile(username:"dzambranob", profile:{
+  updateProfile(username:$username, profile:{
     Email:$Email
     Cel:$Cel
     Tel:$Tel
