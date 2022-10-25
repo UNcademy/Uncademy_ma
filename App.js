@@ -1,142 +1,89 @@
-import { View, Text, StyleSheet, Image, StatusBar } from 'react-native'
-import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client';
+import React, {useState} from "react";
+import { Image } from "react-native";
+import AppLoading from "expo-app-loading";
+import { useFonts } from '@use-expo/font';
+import { Asset } from "expo-asset";
+import { Block, GalioProvider } from "galio-framework";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomePage from './src/screens/HomePage';
-import Profile from './src/screens/Profile';
-import EditProfile from './src/screens/EditProfile';
-import Search from "./src/screens/Search";
-import { onError } from "@apollo/client/link/error";
-import AcadRec from './src/screens/AcadRec';
-
+import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: 'http://192.168.43.65:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
+  uri:"http://192.168.10.8:5000/graphql",
   cache: new InMemoryCache()
-});
+})
+// Before rendering any navigation stack
+import { enableScreens } from "react-native-screens";
+enableScreens();
 
-const Stack = createNativeStackNavigator();
+import Screens from "./navigation/Screens";
+import { Images, articles, argonTheme } from "./constants";
 
+// cache app images
+const assetImages = [
+  Images.Onboarding,
+  Images.LogoOnboarding,
+  Images.Logo,
+  Images.Pro,
+  Images.ArgonLogo,
+  Images.iOSLogo,
+  Images.androidLogo
+];
 
-const errorLink = onError(({ graphqlErrors, networkError}) => {
-  if (graphqlErrors) {
-    graphqlErrors.map(({message, location, path}) => {
-      alert(`Graphql error ${message}`);
-    });
-  }
-});
+// cache product images
+articles.map(article => assetImages.push(article.image));
 
-export default function App() {
-  return (
-    <ApolloProvider client={client}>
-      <NavigationContainer>
-        <StatusBar hidden={true}/>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name = "HomePage" component={HomePage} options={{headerShown:false}}/>
-          <Stack.Screen name = "Profile" component={Profile} options={{headerShown:false}}/>
-          <Stack.Screen name = "EditProfile" component={EditProfile} options={{headerShown:false}}/>
-          <Stack.Screen name = "Search" component={Search} options={{headerShown:false}}/>
-          <Stack.Screen name = "AcadRec" component={AcadRec} options={{headerShown:false}}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ApolloProvider>
-  );
+function cacheImages(images) {
+  return images.map(image => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
 }
 
+export default props => {
+  const [isLoadingComplete, setLoading] = useState(false);
+  let [fontsLoaded] = useFonts({
+    'ArgonExtra': require('./assets/font/argon.ttf'),
+  });
 
-export const styles = StyleSheet.create({
-  container: {
-    paddingTop:50,
-    paddingLeft:20,
-    paddingRight: 20,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-  },
-  item: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 18
-  },
-  title:{
-    fontWeight: 'bold',
-    fontSize: 25
-  },
-  modalView: {
-    width:'90%',
-    height:'50%',
-    backgroundColor: "white",
-    borderRadius: 20,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    paddingBottom:10
-  },
-  button: {
-    borderRadius: 10,
-    padding: 5,
-    elevation: 2,
-    backgroundColor: "lightgrey",
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 1,
-  },
-  item: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 16
-  },
-  title:{
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  modalView: {
-    width:'90%',
-    height:'50%',
-    backgroundColor: "white",
-    borderRadius: 20,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    paddingBottom:10
-  },
-  button: {
-    borderRadius: 10,
-    padding: 5,
-    elevation: 2,
-    backgroundColor: "lightgrey"
-  },
-  item_list: {
-    margin: 30,
-    borderBottomWidth: 5,
-    borderBottomColor: "lightgrey"
-  },
-});
+  function _loadResourcesAsync() {
+    return Promise.all([...cacheImages(assetImages)]);
+  }
+
+  function _handleLoadingError(error) {
+    // In this case, you might want to report the error to your error
+    // reporting service, for example Sentry
+    console.warn(error);
+  };
+
+ function _handleFinishLoading() {
+    setLoading(true);
+  };
+
+  if(!fontsLoaded && !isLoadingComplete) {
+    return (
+      <AppLoading
+        startAsync={_loadResourcesAsync}
+        onError={_handleLoadingError}
+        onFinish={_handleFinishLoading}
+      />
+    );
+  } else if(fontsLoaded) {
+    return (
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <GalioProvider theme={argonTheme}>
+            <Block flex>
+              <Screens />
+            </Block>
+          </GalioProvider>
+        </NavigationContainer>
+      </ApolloProvider>
+      
+    );
+  } else {
+    return null
+  }
+}

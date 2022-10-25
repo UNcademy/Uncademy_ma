@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test",
-    "slug": "test",
+    "name": "UNcademy_ms",
+    "slug": "UNcademy_ms",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
