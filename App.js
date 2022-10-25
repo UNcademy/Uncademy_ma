@@ -92,7 +92,6 @@ export const styles = StyleSheet.create({
     elevation: 2,
     backgroundColor: "lightgrey",
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 1,
