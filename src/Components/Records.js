@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useQuery, gql } from '@apollo/client';
-import { getAllAcademic, GETRECORD } from '../GraphQL/Queries.js';
+import { getAllAcademic, GETRECORD } from '../gql/Query';
 
 
 function Records() {

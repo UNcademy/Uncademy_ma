@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Button, StyleSheet, ScrollView, TextInput} from 'react-native'
 import TopBar from '../components/TopBar'
-import { updateProfile, viewProfile } from "../gql/Query";
+import { updateProfile } from '../gql/Mutation';
 import { useQuery, useMutation } from "@apollo/client";
 
 export default function EditProfile(props) {
@@ -9,19 +9,6 @@ export default function EditProfile(props) {
     const {DATA} = route.params
 
     const username = 'dzambranob'
-/*     const { data, loading, error } = useQuery(viewProfile, {
-        variables:{
-          username:username
-        }
-      });
-
-    if (loading) {
-    return <Text>Obteniendo datos...</Text> //while loading return this
-    }
-    if (error) {
-    return <Text>Error obteniendo los datos, error: {error}</Text>
-    }
-    const DATA = data.viewProfile.data */
     const [email, onChangeEmail] = React.useState(DATA.Email);
     const [phone, onChangePhone] = React.useState(DATA.Cel.toString());
     const [tel, onChangeTel] = React.useState(DATA.Tel.toString());
@@ -45,7 +32,7 @@ export default function EditProfile(props) {
         }
     if (error) {
         console.log(error)
-    return <Text>Error obteniendo los datos</Text>
+    return <Text>Error obteniendo los datos. pero funciona</Text>
     }
 
     return (

@@ -7,12 +7,11 @@ import Profile from './src/screens/Profile';
 import EditProfile from './src/screens/EditProfile';
 import Search from "./src/screens/Search";
 import { onError } from "@apollo/client/link/error";
-import Records from './src/Components/Records.js';
-import Courses from './src/Components/Courses'
+import AcadRec from './src/screens/AcadRec';
 
 
 const client = new ApolloClient({
-  uri: 'http://192.168.0.7:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
+  uri: 'http://192.168.43.65:5000/graphql',  //Recordar que esto debe cambiar!!!!!!!!!!!!
   cache: new InMemoryCache()
 });
 
@@ -37,20 +36,13 @@ export default function App() {
           <Stack.Screen name = "Profile" component={Profile} options={{headerShown:false}}/>
           <Stack.Screen name = "EditProfile" component={EditProfile} options={{headerShown:false}}/>
           <Stack.Screen name = "Search" component={Search} options={{headerShown:false}}/>
+          <Stack.Screen name = "AcadRec" component={AcadRec} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>
   );
 }
 
-/*
-<View style={styles.container}>
-  <Text style={styles.title}>Historial Academico</Text>
-  <Text style={styles.item}>Materias</Text>
-  < Courses />
-  <Text style={styles.item}>Estadisticas</Text>
-  < Records />
-</View>*/
 
 export const styles = StyleSheet.create({
   container: {
@@ -98,7 +90,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     elevation: 2,
-    backgroundColor: "lightgrey"
+    backgroundColor: "lightgrey",
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',

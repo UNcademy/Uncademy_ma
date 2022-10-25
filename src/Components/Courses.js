@@ -1,19 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
 import { FlatList, StyleSheet, Text, View, Item, ScrollView } from 'react-native';
 import React, { useEffect, useState } from "react";
-
-export const GET_COURSES = gql`
-    query getMaterias($id: String!) {
-        getMaterias(id: $id) {
-        materiaId
-        tipologia
-        nombre
-        nota
-        aprobado
-        creditos
-        }
-    }
-`;
+import { GET_COURSES } from '../gql/Query';
 
 function Courses() {
     const { loading, error, data } = useQuery(GET_COURSES, {

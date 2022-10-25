@@ -8,7 +8,7 @@ export default function TopBar(props) {
     <View style={styles.container}>
         <Image style={styles.logo} source={require('../../assets/logo.png')}/>
         <Text style={styles.title}>UNcademy</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+        <TouchableOpacity onPress={() => navigation.navigate('AcadRec')}>
           <Entypo name="menu" size={30} color="#492A55" style={styles.icon}/>
         </TouchableOpacity>
     </View>

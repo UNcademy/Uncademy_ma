@@ -21,7 +21,7 @@ const { data, loading, error } = useQuery(viewProfile, {
 
   if (error) {
     console.log(error)
-    return <Text>Error obteniendo los datos</Text>
+    return <Text>Error obteniendo los datos pero conecta</Text>
   }
   const DATA = data.viewProfile.data
   return (

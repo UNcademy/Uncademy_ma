@@ -54,19 +54,51 @@ query viewProfile($username : String!) {
 }
 `
 
-export const updateProfile = gql `
-mutation updateProfile($username:String!, $Email:String!, $Cel:Float!, $Tel:Float!, $Address:String!){
-  updateProfile(username:$username, profile:{
-    Email:$Email
-    Cel:$Cel
-    Tel:$Tel
-    Address:$Address
-  }){
-    data{
-      UserName
-      UNMail
-      Cel
+export const getAllAcademic = gql`
+    query getAllAcademic {
+        getAllAcademic {
+        userId
+        semestre
+        creditosInscritos
+        creditosAprobados
+        creditosPendientes
+        creditosCursados
+        creditosCancelados
+        papa
+        pa
+        pappi
+        avance
+        }
     }
-  }
-}
-`
+`;
+
+export const GETRECORD = gql`
+    query getAcademic($id: ID!) {
+        getAcademic(id: $id) {
+        userId
+        semestre
+        creditosInscritos
+        creditosAprobados
+        creditosPendientes
+        creditosCursados
+        creditosCancelados
+        papa
+        pa
+        pappi
+        avance
+        }
+    }
+`;
+
+export const GET_COURSES = gql`
+    query getMaterias($id: String!) {
+        getMaterias(id: $id) {
+        materiaId
+        tipologia
+        nombre
+        nota
+        aprobado
+        creditos
+        }
+    }
+`;
