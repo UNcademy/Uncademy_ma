@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from '../../App'
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native'
-import Courses from '../Components/Courses'
-import Records from '../Components/Records'
+import Courses from '../components/Courses'
+import Records from '../components/Records'
 
 const AcadRec = () => {
   return (
