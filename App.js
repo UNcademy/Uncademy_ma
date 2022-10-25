@@ -6,6 +6,9 @@ import HomePage from './src/screens/HomePage';
 import Profile from './src/screens/Profile';
 import EditProfile from './src/screens/EditProfile';
 import Search from "./src/screens/Search";
+import { onError } from "@apollo/client/link/error";
+import Records from './src/Components/Records.js';
+import Courses from './src/Components/Courses'
 
 
 const client = new ApolloClient({
@@ -14,6 +17,15 @@ const client = new ApolloClient({
 });
 
 const Stack = createNativeStackNavigator();
+
+
+const errorLink = onError(({ graphqlErrors, networkError}) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({message, location, path}) => {
+      alert(`Graphql error ${message}`);
+    });
+  }
+});
 
 export default function App() {
   return (
@@ -31,8 +43,62 @@ export default function App() {
   );
 }
 
+/*
+<View style={styles.container}>
+  <Text style={styles.title}>Historial Academico</Text>
+  <Text style={styles.item}>Materias</Text>
+  < Courses />
+  <Text style={styles.item}>Estadisticas</Text>
+  < Records />
+</View>*/
+
 export const styles = StyleSheet.create({
   container: {
+    paddingTop:50,
+    paddingLeft:20,
+    paddingRight: 20,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+  },
+  item: {
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  title:{
+    fontWeight: 'bold',
+    fontSize: 25
+  },
+  modalView: {
+    width:'90%',
+    height:'50%',
+    backgroundColor: "white",
+    borderRadius: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    paddingBottom:10
+  },
+  button: {
+    borderRadius: 10,
+    padding: 5,
+    elevation: 2,
+    backgroundColor: "lightgrey"
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
@@ -83,4 +149,3 @@ export const styles = StyleSheet.create({
     borderBottomColor: "lightgrey"
   },
 });
-/*  */
