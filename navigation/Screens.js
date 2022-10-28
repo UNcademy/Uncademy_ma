@@ -3,15 +3,11 @@ import { Animated, Dimensions, Easing } from "react-native";
 import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
 
-import Articles from "../screens/Articles";
-import { Block } from "galio-framework";
 // drawer
 import CustomDrawerContent from "./Menu";
-import Elements from "../screens/Elements";
 // screens
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
-import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";

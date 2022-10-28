@@ -2,7 +2,6 @@ import { Block, Text, theme } from "galio-framework";
 import { Image, ScrollView, StyleSheet } from "react-native";
 
 import { DrawerItem as DrawerCustomItem } from "../components";
-import Images from "../constants/Images";
 import React from "react";
 
 function CustomDrawerContent({

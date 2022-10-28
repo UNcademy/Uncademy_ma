@@ -22,15 +22,9 @@ import { Images, articles, argonTheme } from "./constants";
 const assetImages = [
   Images.Onboarding,
   Images.LogoOnboarding,
-  Images.Logo,
-  Images.Pro,
-  Images.ArgonLogo,
-  Images.iOSLogo,
-  Images.androidLogo
+  Images.Logo
 ];
 
-// cache product images
-articles.map(article => assetImages.push(article.image));
 
 function cacheImages(images) {
   return images.map(image => {
