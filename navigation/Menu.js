@@ -13,7 +13,7 @@ function CustomDrawerContent({
   state,
   ...rest
 }) {
-  const screens = ["Perfil", "Cerrar sesión"];
+  const screens = ["Home", "Perfil", "Buscar asignatura", "Historia academica", "Cerrar sesión"];
   return (
     <Block
       style={styles.container}

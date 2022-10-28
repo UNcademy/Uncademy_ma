@@ -16,6 +16,9 @@ import Profile from "../screens/Profile";
 import React from "react";
 import Register from "../screens/Register";
 import Login from "../screens/Login";
+import Search from "../screens/Search";
+import AcadRec from "../screens/AcadRec";
+import EditProfile from "../screens/EditProfile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -56,6 +59,66 @@ function ProfileStack(props) {
   );
 }
 
+function SearchStack(props) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Search"
+      screenOptions={{
+        mode: "card",
+        headerShown: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              transparent
+              white
+              title="Search"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#FFFFFF" },
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function AcadRecStack(props) {
+  return (
+    <Stack.Navigator
+      initialRouteName="AcadRec"
+      screenOptions={{
+        mode: "card",
+        headerShown: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="AcadRec"
+        component={AcadRec}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              transparent
+              white
+              title="AcadRec"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#FFFFFF" },
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function HomeStack(props) {
   return (
     <Stack.Navigator
@@ -80,23 +143,7 @@ function HomeStack(props) {
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
       />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
+      
     </Stack.Navigator>
   );
 }
@@ -116,24 +163,12 @@ export default function OnboardingStack(props) {
           headerTransparent: true,
         }}
       />
+
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen
-        name="Onboarding2"
-        component={Onboarding}
-        option={{
-          headerTransparent: true,
-        }}
-      />
       <Stack.Screen name="Account" component={Register} />
-      <Stack.Screen
-        name="Onboarding3"
-        component={Onboarding}
-        option={{
-          headerTransparent: true,
-        }}
-      />
       <Stack.Screen name="Home" component={AppStack} />
       <Stack.Screen name="Cerrar sesión" component={Login} />
+      <Stack.Screen name="EditProfile" component={EditProfile} />
     </Stack.Navigator>
   );
 }
@@ -186,6 +221,20 @@ function AppStack(props) {
       <Drawer.Screen
         name="Cerrar sesión"
         component={OnboardingStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Buscar asignatura"
+        component={SearchStack}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="Historia academica"
+        component={AcadRecStack}
         options={{
           headerShown: false,
         }}

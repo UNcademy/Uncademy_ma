@@ -1,342 +1,183 @@
 import React from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  Image,
-  ImageBackground,
-  Platform
-} from "react-native";
-import { Block, Text, theme } from "galio-framework";
+import { viewProfile } from "../gql/queries";
+import { useQuery } from "@apollo/client";
+import { View, Text, Button, StyleSheet, ScrollView} from 'react-native'
+import TopBar from '../components/TopBar'
 
-import { Button } from "../components";
-import { Images, argonTheme } from "../constants";
-import { HeaderHeight } from "../constants/utils";
+export default function Profile(props) {
 
-const { width, height } = Dimensions.get("screen");
+const { navigation } = props;
+const username = 'dzambranob'
+const { data, loading, error } = useQuery(viewProfile, {
+    variables:{
+      username:username
+    },
+    fetchPolicy:'network-only'
+  });
 
-const thumbMeasure = (width - 48 - 32) / 3;
-
-class Profile extends React.Component {
-  render() {
-    return (
-      <Block flex style={styles.profile}>
-        <Block flex>
-          <ImageBackground
-            source={Images.ProfileBackground}
-            style={styles.profileContainer}
-            imageStyle={styles.profileBackground}
-          >
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={{ width, marginTop: '25%' }}
-            >
-              <Block flex style={styles.profileCard}>
-                <Block middle style={styles.avatarContainer}>
-                  <Image
-                    source={{ uri: Images.ProfilePicture }}
-                    style={styles.avatar}
-                  />
-                </Block>
-                <Block style={styles.info}>
-                  <Block
-                    middle
-                    row
-                    space="evenly"
-                    style={{ marginTop: 20, paddingBottom: 24 }}
-                  >
-                    <Button
-                      small
-                      style={{ backgroundColor: argonTheme.COLORS.INFO }}
-                    >
-                      CONNECT
-                    </Button>
-                    <Button
-                      small
-                      style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                    >
-                      MESSAGE
-                    </Button>
-                  </Block>
-                  <Block row space="between">
-                    <Block middle>
-                      <Text
-                        bold
-                        size={18}
-                        color="#525F7F"
-                        style={{ marginBottom: 4 }}
-                      >
-                        2K
-                      </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Orders</Text>
-                    </Block>
-                    <Block middle>
-                      <Text
-                        bold
-                        color="#525F7F"
-                        size={18}
-                        style={{ marginBottom: 4 }}
-                      >
-                        10
-                      </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Photos</Text>
-                    </Block>
-                    <Block middle>
-                      <Text
-                        bold
-                        color="#525F7F"
-                        size={18}
-                        style={{ marginBottom: 4 }}
-                      >
-                        89
-                      </Text>
-                      <Text size={12} color={argonTheme.COLORS.TEXT}>Comments</Text>
-                    </Block>
-                  </Block>
-                </Block>
-                <Block flex>
-                  <Block middle style={styles.nameInfo}>
-                    <Text bold size={28} color="#32325D">
-                      Jessica Jones, 27
-                    </Text>
-                    <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                      San Francisco, USA
-                    </Text>
-                  </Block>
-                  <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                    <Block style={styles.divider} />
-                  </Block>
-                  <Block middle>
-                    <Text
-                      size={16}
-                      color="#525F7F"
-                      style={{ textAlign: "center" }}
-                    >
-                      An artist of considerable range, Jessica name taken by
-                      Melbourne …
-                    </Text>
-                    <Button
-                      color="transparent"
-                      textStyle={{
-                        color: "#233DD2",
-                        fontWeight: "500",
-                        fontSize: 16
-                      }}
-                    >
-                      Show more
-                    </Button>
-                  </Block>
-                  <Block
-                    row
-                    space="between"
-                  >
-                    <Text bold size={16} color="#525F7F" style={{marginTop: 12}}>
-                      Album
-                    </Text>
-                    <Button
-                      small
-                      color="transparent"
-                      textStyle={{ color: "#5E72E4", fontSize: 12, marginLeft: 24 }}
-                    >
-                      View all
-                    </Button>
-                  </Block>
-                  <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                    <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      {Images.Viewed.map((img, imgIndex) => (
-                        <Image
-                          source={{ uri: img }}
-                          key={`viewed-${img}`}
-                          resizeMode="cover"
-                          style={styles.thumb}
-                        />
-                      ))}
-                    </Block>
-                  </Block>
-                </Block>
-              </Block>
-            </ScrollView>
-          </ImageBackground>
-        </Block>
-        {/* <ScrollView showsVerticalScrollIndicator={false} 
-                    contentContainerStyle={{ flex: 1, width, height, zIndex: 9000, backgroundColor: 'red' }}>
-        <Block flex style={styles.profileCard}>
-          <Block middle style={styles.avatarContainer}>
-            <Image
-              source={{ uri: Images.ProfilePicture }}
-              style={styles.avatar}
-            />
-          </Block>
-          <Block style={styles.info}>
-            <Block
-              middle
-              row
-              space="evenly"
-              style={{ marginTop: 20, paddingBottom: 24 }}
-            >
-              <Button small style={{ backgroundColor: argonTheme.COLORS.INFO }}>
-                CONNECT
-              </Button>
-              <Button
-                small
-                style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-              >
-                MESSAGE
-              </Button>
-            </Block>
-
-            <Block row space="between">
-              <Block middle>
-                <Text
-                  bold
-                  size={12}
-                  color="#525F7F"
-                  style={{ marginBottom: 4 }}
-                >
-                  2K
-                </Text>
-                <Text size={12}>Orders</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  10
-                </Text>
-                <Text size={12}>Photos</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  89
-                </Text>
-                <Text size={12}>Comments</Text>
-              </Block>
-            </Block>
-          </Block>
-          <Block flex>
-              <Block middle style={styles.nameInfo}>
-                <Text bold size={28} color="#32325D">
-                  Jessica Jones, 27
-                </Text>
-                <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                  San Francisco, USA
-                </Text>
-              </Block>
-              <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                <Block style={styles.divider} />
-              </Block>
-              <Block middle>
-                <Text size={16} color="#525F7F" style={{ textAlign: "center" }}>
-                  An artist of considerable range, Jessica name taken by
-                  Melbourne …
-                </Text>
-                <Button
-                  color="transparent"
-                  textStyle={{
-                    color: "#233DD2",
-                    fontWeight: "500",
-                    fontSize: 16
-                  }}
-                >
-                  Show more
-                </Button>
-              </Block>
-              <Block
-                row
-                style={{ paddingVertical: 14, alignItems: "baseline" }}
-              >
-                <Text bold size={16} color="#525F7F">
-                  Album
-                </Text>
-              </Block>
-              <Block
-                row
-                style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-              >
-                <Button
-                  small
-                  color="transparent"
-                  textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                >
-                  View all
-                </Button>
-              </Block>
-              <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                <Block row space="between" style={{ flexWrap: "wrap" }}>
-                  {Images.Viewed.map((img, imgIndex) => (
-                    <Image
-                      source={{ uri: img }}
-                      key={`viewed-${img}`}
-                      resizeMode="cover"
-                      style={styles.thumb}
-                    />
-                  ))}
-                </Block>
-              </Block>
-          </Block>
-        </Block>
-                  </ScrollView>*/}
-      </Block>
-    );
+  if (loading) {
+    return <Text>Obteniendo datos...</Text> //while loading return this
   }
+
+  if (error) {
+    console.log(error)
+    return <Text>Error obteniendo los datos pero conecta</Text>
+  }
+  const DATA = data.viewProfile.data
+  return (
+    <View style={styles.container}>
+      <TopBar navigation = {navigation}/>
+      <View style={styles.content}>
+        <View style={styles.title}>
+          <Text style={styles.text}>
+            Perfil{"\n"}
+            Usuario: {DATA.UserName}
+            </Text>
+          <Button
+            title="Editar perfil"
+            onPress={() => navigation.navigate('EditProfile', {DATA: DATA})}
+          />
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={{fontSize:20, fontWeight:'bold'}}>Datos Personales</Text>
+          <View style={styles.profileText}>
+            <Text style={styles.profileTitle}>Nombre Completo</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.FullName}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Edad</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.Age}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Documento</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.Document}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Dep. de expedición</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.DepDocument}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Ciudad de expedición</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.CityDocument}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Género biológico</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.Genre}</Text>
+          </View>
+          <View style={styles.profileText}>
+            <Text style={styles.profileTitle}>Correo electrónico personal</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.Email}</Text>
+          </View>
+          <View style={styles.dataView}>
+            <View style={[styles.profileText, {width:'38%', flexDirection:'row', justifyContent:'space-between'}]}>
+              <Text style={styles.profileTitle}>RH</Text>
+              <Text style={{alignSelf:'flex-end'}}>{DATA.BloodType}</Text>
+            </View>
+            <View style={[styles.profileText, {width:'58%', flexDirection:'row', justifyContent:'space-between'}]}>
+              <Text style={styles.profileTitle}>Tarjeta Militar</Text>
+              <Text style={{alignSelf:'flex-end'}}>{!DATA.ArmyCard ?'No':'Si'}</Text>
+            </View>
+          </View>
+          <Text style={{fontSize:20, fontWeight:'bold'}}>Datos de nacimiento</Text>
+          <View style={styles.dataView}>
+            <View style={[styles.profileText, {width:'50%'}]}>
+              <Text style={styles.profileTitle}>Lugar de Nacimiento</Text>
+              <Text style={{alignSelf:'flex-end'}}>{DATA.BirthPlace}</Text>
+            </View>
+            <View style={[styles.profileText, {width:'40%'}]}>
+              <Text style={styles.profileTitle}>País</Text>
+              <Text style={{alignSelf:'flex-end'}}>{DATA.Country}</Text>
+            </View>
+          </View>  
+          <Text style={{fontSize:20, fontWeight:'bold'}}>Datos de contacto</Text>
+          <View style={styles.dataView}>
+            <View style={[styles.profileText, {width:'50%'}]}>
+              <Text style={styles.profileTitle}>Teléfono celular</Text>
+              <Text style={{alignSelf:'flex-end'}}>{DATA.Cel}</Text>
+            </View>
+            <View style={[styles.profileText, {width:'40%'}]}>
+              <Text style={styles.profileTitle}>Teléfono fijo</Text>
+              <Text style={{alignSelf:'flex-end'}}>{DATA.Tel}</Text>
+            </View>
+          </View>
+          <View style={styles.profileText}>
+            <Text style={styles.profileTitle}>Dirección</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.Address}</Text>
+          </View>
+          <Text style={{fontSize:20, fontWeight:'bold'}}>Datos de acudientes</Text>
+          <View style={styles.profileText}>
+            <Text style={styles.profileTitle}>Nombre del Padre</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.FatherFullName}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Documento del Padre</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.FatherDocument}</Text>
+          </View>
+          <View style={styles.profileText}>
+            <Text style={styles.profileTitle}>Nombre de la Madre</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.MotherFullName}</Text>
+          </View>
+          <View style={[styles.profileText, {flexDirection:'row', justifyContent:'space-between'}]}>
+            <Text style={styles.profileTitle}>Documento de la Madre</Text>
+            <Text style={{alignSelf:'flex-end'}}>{DATA.MotherDocument}</Text>
+          </View>
+        </ScrollView>
+      </View>  
+    </View>
+  )
+/* 
+    return (
+        <FlatList
+          data={data.getStats}
+          renderItem={({ item }) => <SubjectItem subject={item} />}
+          keyExtractor={(item, index) => index}
+        />
+    ); */
 }
 
 const styles = StyleSheet.create({
-  profile: {
-    marginTop: Platform.OS === "android" ? -HeaderHeight : 0,
-    // marginBottom: -HeaderHeight * 2,
-    flex: 1
+  container:{
+    backgroundColor:'#033B86',
+    height:'100%'
   },
-  profileContainer: {
-    width: width,
-    height: height,
-    padding: 0,
-    zIndex: 1
+  text:{
+    fontSize:15,
+    color:'#5DA7DB',
+    fontWeight:'bold'
   },
-  profileBackground: {
-    width: width,
-    height: height / 2
+  content:{
+    backgroundColor:'#F2F2F2',
+    borderRadius:30,
+    marginVertical:25,
+    padding:10,
+    marginHorizontal:10,
+    height:'80%'
   },
-  profileCard: {
-    // position: "relative",
-    padding: theme.SIZES.BASE,
-    marginHorizontal: theme.SIZES.BASE,
-    marginTop: 65,
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    backgroundColor: theme.COLORS.WHITE,
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 8,
-    shadowOpacity: 0.2,
-    zIndex: 2
+  title:{
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    paddingBottom:10,
+    alignContent:'center'
   },
-  info: {
-    paddingHorizontal: 40
+  profileText:{
+    color:'aaa',
+    paddingVertical:5,
+    paddingHorizontal:10,
+    borderBottomWidth:1,
+    borderBottomColor:'#009B86',
+    borderRadius:10,
+    marginHorizontal:5,
+    justifyContent:'flex-end',
+    marginVertical:10
   },
-  avatarContainer: {
-    position: "relative",
-    marginTop: -80
+  dataView:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginVertical:5
   },
-  avatar: {
-    width: 124,
-    height: 124,
-    borderRadius: 62,
-    borderWidth: 0
-  },
-  nameInfo: {
-    marginTop: 35
-  },
-  divider: {
-    width: "90%",
-    borderWidth: 1,
-    borderColor: "#E9ECEF"
-  },
-  thumb: {
-    borderRadius: 4,
-    marginVertical: 4,
-    alignSelf: "center",
-    width: thumbMeasure,
-    height: thumbMeasure
+  profileTitle:{
+    color:'red', 
+    fontWeight:'bold',
+    fontSize:15
   }
-});
-
-export default Profile;
+})
