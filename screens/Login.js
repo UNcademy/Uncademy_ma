@@ -8,6 +8,8 @@ import {
   Alert
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from "jwt-decode";
 
 
 import { Button, Icon, Input } from "../components";
@@ -16,6 +18,7 @@ import { useLazyQuery} from "@apollo/client";
 import { login } from "../gql/queries";
 
 const { width, height } = Dimensions.get("screen");
+
 
 export default function Login (props){
     const [username, setUsername] = useState("")
@@ -34,11 +37,24 @@ export default function Login (props){
       enabled:false,
       onCompleted:(data) => {
         if (data.login.statusCode == 200){
+          storeData(data.login.data.accessToken)
           navigation.navigate("Home")
         }       
                   
       }
     }) 
+
+    const storeData = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value)
+        await AsyncStorage.setItem('@storage_Key', jsonValue)
+        console.log(jsonValue)
+        console.log(jwt_decode(jsonValue));
+      } catch (e) {
+        console.log(e)
+        // saving error
+      }
+    }
     
     return (
       <Block flex middle>
