@@ -48,8 +48,6 @@ export default function Login (props){
       try {
         const jsonValue = JSON.stringify(value)
         await AsyncStorage.setItem('@storage_Key', jsonValue)
-        console.log(jsonValue)
-        console.log(jwt_decode(jsonValue));
       } catch (e) {
         console.log(e)
         // saving error
