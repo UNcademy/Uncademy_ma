@@ -41,7 +41,7 @@
     "react-native-screens": "~3.11.1"
   },
   "devDependencies": {
-    "babel-preset-expo": "~9.1.0"
+    "@babel/core": "^7.19.6"
   },
   "private": true
 }

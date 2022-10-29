@@ -19,7 +19,7 @@ function CustomDrawerContent({
       forceInset={{ top: "always", horizontal: "never" }}
     >
       <Block flex={0.05} style={styles.header}>
-        <Text color="#8898AA" size={18}>
+        <Text color="red" size={19}>
           Bienvenidos a UNcademy!
         </Text>
       </Block>
@@ -34,8 +34,7 @@ function CustomDrawerContent({
                 focused={state.index === index ? true : false}
               />
             );
-          })}
-          
+          })}     
         </ScrollView>
       </Block>
     </Block>

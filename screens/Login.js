@@ -48,8 +48,6 @@ export default function Login (props){
       try {
         const jsonValue = JSON.stringify(value)
         await AsyncStorage.setItem('@storage_Key', jsonValue)
-        console.log(jsonValue)
-        console.log(jwt_decode(jsonValue));
       } catch (e) {
         console.log(e)
         // saving error
@@ -59,10 +57,7 @@ export default function Login (props){
     return (
       <Block flex middle>
         <StatusBar hidden />
-        <ImageBackground
-          source={Images.RegisterBackground}
-          style={{ width, height, zIndex: 1 }}
-        >
+        <Block style ={{backgroundColor:"#033B86"}}>
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
                 <Block flex={0.4} middle>
@@ -126,7 +121,7 @@ export default function Login (props){
                 </Block>
             </Block>
           </Block>
-        </ImageBackground>
+        </Block>
       </Block>
     );
 }

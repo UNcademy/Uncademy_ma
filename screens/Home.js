@@ -1,22 +1,15 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Dimensions, Text, Image} from 'react-native';
 import { Block, theme } from 'galio-framework';
 
-import { Card } from '../components';
 const { width } = Dimensions.get('screen');
 
 class Home extends React.Component {
-  renderArticles = () => {
-    return (
-      <ScrollView>
-      </ScrollView>
-    )
-  }
-
   render() {
     return (
       <Block flex center style={styles.home}>
-        {this.renderArticles()}
+        <Text style={styles.title}>¡Bienvenido a UNcademy</Text>
+        <Image source={require('../assets/logo.png')} style={styles.image}/>
       </Block>
     );
   }
@@ -24,12 +17,21 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
   home: {
-    width: width,    
+    width: width,
+    backgroundColor:'#A9C2D9',
+    justifyContent:'center'
   },
-  articles: {
-    width: width - theme.SIZES.BASE * 2,
-    paddingVertical: theme.SIZES.BASE,
+  image: {
+    width:150,
+    height:165,
+    margin:10,
+    padding:10
   },
+  title:{
+    color:"red",
+    fontSize:25,
+    fontWeight:'bold'
+},
 });
 
 export default Home;

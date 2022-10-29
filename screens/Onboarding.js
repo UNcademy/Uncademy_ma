@@ -34,12 +34,7 @@ class Onboarding extends React.Component {
               <Block style={styles.title}>
                 <Block>
                   <Text color="white" size={40}>
-                    Sistema de Información
-                  </Text>
-                </Block>
-                <Block>
-                  <Text color="white" size={40}>
-                    Académica
+                    Sistema de Información {"\n"}Académica
                   </Text>
                 </Block>
                 <Block style={styles.subTitle}>
@@ -94,7 +89,9 @@ const styles = StyleSheet.create({
     height: 150,
     zIndex: 100,
     position: 'relative',
-    marginTop: '-60%'
+    marginTop: '-60%',
+    backgroundColor:'#F2F2F2',
+    borderRadius:10
   },
   title: {
     marginTop:'-5%'

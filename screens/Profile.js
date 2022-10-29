@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { viewProfile } from "../gql/queries";
 import { useQuery } from "@apollo/client";
 import { View, Text, Button, StyleSheet, ScrollView} from 'react-native'
 import TopBar from '../components/TopBar'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from "jwt-decode";
 
 export default function Profile(props) {
 
-const { navigation } = props;
-const username = 'dzambranob'
-const { data, loading, error } = useQuery(viewProfile, {
+  const [username, setUsername] = useState("");
+  const { navigation } = props;
+
+  const getData = async () => {
+    let decodedData
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storage_Key').then(
+        (result) => {
+          decodedData = result
+        }
+      )
+    } catch (e) {
+      console.log(e)
+    }
+    
+    return jwt_decode(decodedData)
+  }
+
+  const jsonData = getData().then(
+    (decoded) => {
+      setUsername(decoded.username);
+    }
+  )
+
+  if (username == undefined){
+    return <Text>Cargando....</Text>
+  }
+
+  const { data, loading, error } = useQuery(viewProfile, {
     variables:{
       username:username
     },
-    fetchPolicy:'network-only'
+    fetchPolicy:'no-cache'
   });
 
   if (loading) {
@@ -24,6 +52,7 @@ const { data, loading, error } = useQuery(viewProfile, {
     return <Text>Error obteniendo los datos pero conecta</Text>
   }
   const DATA = data.viewProfile.data
+
   return (
     <View style={styles.container}>
       <TopBar navigation = {navigation}/>
@@ -137,7 +166,7 @@ const { data, loading, error } = useQuery(viewProfile, {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor:'#033B86',
+    backgroundColor:'#A9C2D9',
     height:'100%'
   },
   text:{

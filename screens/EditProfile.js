@@ -8,7 +8,7 @@ export default function EditProfile(props) {
     const { route, navigation } = props;
     const {DATA} = route.params
 
-    const username = 'dzambranob'
+    const username = DATA.UserName
     const [email, onChangeEmail] = React.useState(DATA.Email);
     const [phone, onChangePhone] = React.useState(DATA.Cel.toString());
     const [tel, onChangeTel] = React.useState(DATA.Tel.toString());
@@ -23,7 +23,7 @@ export default function EditProfile(props) {
             Address: address
         },
         onCompleted:()=>{
-            navigation.navigate('HomePage')
+            navigation.navigate('Home')
         }
     })
 
