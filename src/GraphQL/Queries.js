@@ -19,7 +19,7 @@ export const getAllAcademic = gql`
 `;
 
 export const GETRECORD = gql`
-    query getAcademic($id: ID!) {
+    query getAcademic($id: String!) {
         getAcademic(id: $id) {
         userId
         semestre
