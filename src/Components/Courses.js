@@ -18,24 +18,6 @@ export const GET_COURSES = gql`
 `;
 
 function Courses() {
-    /*
-    const test = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImF1dGhvcml6YXRpb24iOiJhZG1pbiJ9.f7iKN-xi24qrQ5NQtOe0jiriotT-rve3ru6sskbQXnA";
-    const storeData = async (value) => {
-        try {
-            const jsonValue = JSON.stringify(value)
-            await AsyncStorage.setItem('@storage_Key', jsonValue)
-            //console.log(jsonValue)
-            //console.log(jwt_decode(jsonValue));
-        } catch (e) {
-            console.log(e)
-            // saving error
-        }
-    }
-    storeData(test); 
-    
-
-    Test token
-    */
     const [username, setUsername] = useState("");
 
     const getData = async () => {
