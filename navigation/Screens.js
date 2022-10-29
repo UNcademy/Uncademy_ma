@@ -175,10 +175,11 @@ function AppStack(props) {
       style={{ flex: 1 }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       drawerStyle={{
-        backgroundColor: "white",
+        backgroundColor: "#A9C2D9",
         width: width * 0.8,
       }}
       drawerContentOptions={{
+        drawerPosition: "right",
         activeTintcolor: "white",
         inactiveTintColor: "#000",
         activeBackgroundColor: "transparent",

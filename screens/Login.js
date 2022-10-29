@@ -57,10 +57,7 @@ export default function Login (props){
     return (
       <Block flex middle>
         <StatusBar hidden />
-        <ImageBackground
-          source={Images.RegisterBackground}
-          style={{ width, height, zIndex: 1 }}
-        >
+        <Block style ={{backgroundColor:"#033B86"}}>
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
                 <Block flex={0.4} middle>
@@ -124,7 +121,7 @@ export default function Login (props){
                 </Block>
             </Block>
           </Block>
-        </ImageBackground>
+        </Block>
       </Block>
     );
 }

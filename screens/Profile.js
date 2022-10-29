@@ -166,7 +166,7 @@ export default function Profile(props) {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor:'#033B86',
+    backgroundColor:'#A9C2D9',
     height:'100%'
   },
   text:{
