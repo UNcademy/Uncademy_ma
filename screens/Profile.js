@@ -40,7 +40,6 @@ export default function Profile(props) {
     variables:{
       username:username
     },
-    fetchPolicy:'no-cache'
   });
 
   if (loading) {

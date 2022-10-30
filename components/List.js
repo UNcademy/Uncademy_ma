@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
     paddingTop:50,
     paddingLeft:20,
     paddingRight: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#A9C2D9",
     borderRadius: 10,
   },
   item: {
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: '#ffffff',
     fontWeight: 'bold',
     fontSize: 18,
   },

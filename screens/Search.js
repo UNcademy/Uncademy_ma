@@ -29,8 +29,11 @@ export default Search;
 
 const styles = StyleSheet.create({
   root: {
+    backgroundColor: "#A9C2D9",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 160,
+    height: "70%"
   },
   title: {
     width: "100%",
