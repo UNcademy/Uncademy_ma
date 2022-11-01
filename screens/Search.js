@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#A9C2D9",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 160,
+    marginTop: 900,
     height: "70%"
   },
   title: {

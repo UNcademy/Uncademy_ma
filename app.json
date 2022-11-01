@@ -21,7 +21,11 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "build": {
+        "babel": {
+          "include": ["galio-framework"]
+        }
+      }
     }
   }
 }

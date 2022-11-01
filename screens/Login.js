@@ -109,7 +109,7 @@ export default function Login (props){
                     </Block>
                     <Block middle>
                       <Button color="primary" style={styles.createButton} onPress={() => {
-                        runQuery()
+                        navigation.navigate("Home")
                         
                       }}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
