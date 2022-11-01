@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import React, {useState} from "react";
 import { Text, View, FlatList, SafeAreaView, Pressable, StyleSheet } from "react-native";
 import ModalSubject from "./ModalSubject";
 import { searchSubjectByCode } from "../gql/queries";
