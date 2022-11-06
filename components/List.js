@@ -36,31 +36,36 @@ const List = (props) => {
     }
 
   const RenderItem = ({ item }) => {
-
     // when no input, show all
-    if (props.searchPhrase === "") {
-      return(
-      <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
-        <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
-      </Pressable>
-      ) 
-    }
-    // filter of the name
-    if (item.nombre.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
+    if (!props.searchPhrase) {
       return(
         <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
           <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
         </Pressable>
       ) 
     }
-    // filter of the description
-    if (item.descripcion.toUpperCase().includes(props.searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-      return(
-        <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
-          <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
-        </Pressable>
-      ) 
+    else{
+      if(item.nombre.toUpperCase().includes(props.searchPhrase.toUpperCase())){
+        return(
+          <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
+            <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
+          </Pressable>
+        )
+      }
+      if (item.descripcion.toUpperCase().includes(props.searchPhrase.toUpperCase())) {
+        return(
+          <Pressable style={styles.item_list} onPress={() => {setModalVisible(true); setcodigoMateria(item.codigoMateria)}}>
+            <Item nombre={item.nombre} descripcion={item.descripcion} codigoMateria={item.codigoMateria}/>
+          </Pressable>
+        ) 
+      }
+      else{
+        return(
+          null
+        )
+      }
     }
+
   };
 
   return (
@@ -78,7 +83,7 @@ const List = (props) => {
 };
 
 export const styles = StyleSheet.create({
-  container: {
+   container: {
     paddingTop:50,
     paddingLeft:20,
     paddingRight: 20,

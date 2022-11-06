@@ -20,7 +20,7 @@ const Search = () => {
         clicked={clicked}
         setClicked={setClicked}
       />
-      {!data ? (<ActivityIndicator size="large" />) : (<List searchPhrase={searchPhrase} data={data} setClicked={setClicked}/>)}
+      {!data ? (<ActivityIndicator size="large" />) : (<List searchPhrase={searchPhrase} data={data} setClicked={setClicked} setSearchPhrase={setSearchPhrase} />)}
     </SafeAreaView>
   );
 };
