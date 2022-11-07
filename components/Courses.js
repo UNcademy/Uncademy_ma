@@ -1,57 +1,77 @@
 import { useQuery, gql } from '@apollo/client';
 import { FlatList, StyleSheet, Text, View, Item, ScrollView } from 'react-native';
-import React, { useEffect, useState } from "react";
-import { GET_COURSES } from '../gql/queries';
+import React, { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {GET_COURSES} from '../gql/queries'
+import jwt_decode from "jwt-decode";
+
 
 function Courses() {
+    const [username, setUsername] = useState("null");
     const { loading, error, data } = useQuery(GET_COURSES, {
         variables: {
-            id: "string"
+            id: username
         },
     });
 
-    const [materias, setMaterias] = useState([]);
+    console.log(username)
 
-    useEffect(() => {
-        if (data) {
-            setMaterias(data.getMaterias);
+    const getData = async () => {
+        let decodedData
+        try {
+            const jsonValue = await AsyncStorage.getItem('@storage_Key').then(
+                (result) => {
+                    decodedData = result
+                }
+            )
+        } catch (e) {
+            console.log(e)
         }
+        return jwt_decode(decodedData)
+    }
 
-    }, [data]);
+    const jsonData = getData().then(
+        (decoded) => {
+            setUsername(decoded.username);
+            console.log(decoded.username)
+        }
+    )
 
-    const coursesItem = ({ materia }) => {
-        const { materiaId, nombre } = materia;
+    if (username == undefined) {
+        return <Text>Cargando....</Text>
+    }
 
-        return (
-            <Pressable style={styles.item} onPress={() => { setModalVisible(true); setCode(code); }}>
-                <Text style={styles.header}>{nombre}</Text>
-            </Pressable>
-        );
-    };
+    if (loading) {
+        return <Text>Obteniendo datos...</Text> //while loading return this
+    }
 
+    if (error) {
+        console.log(error)
+        return <Text>Error obteniendo los datos pero conecta</Text>
+    }
+
+
+    const DATA = data.getMaterias[0];
     return (
+        
         <View>
+            
             <ScrollView>
                 <View style={styles.container}>
-                    {materias.map((val) => {
-                        return (
+
                             <View style={styles.item}>
                                 
                                 <Text> 
-                                    <Text style={styles.columnRow}> Nombre: {val.nombre} </Text>
+                                    <Text style={styles.columnRow}>Nombre: {DATA.nombre} </Text>
                                     <Text style={styles.columnRow}>{'              '}</Text>
-                                    <Text style={styles.columnRow}> Tipologia: {val.tipologia} </Text>
+                                    <Text style={styles.columnRow}>Tipologia: {DATA.tipologia} </Text>
                                     <Text style={styles.columnRow}>{'                 '}</Text>
-                                    <Text style={styles.columnRow}> Creditos: {val.creditos} </Text>
+                                    <Text style={styles.columnRow}>Creditos: {DATA.creditos} </Text>
                                     <Text>{'                      '}</Text>
-                                    Nota: {val.nota}
+                                    Nota: {DATA.nota}
                                 </Text>
                                 <ItemDivider></ItemDivider>
                             </View>
-
-                        );
-                    })}
-
                 </View>
             </ScrollView>
         </View>
@@ -89,42 +109,14 @@ const styles = StyleSheet.create({
         marginBottom: 2,
     },
     columnRow: {
-        flex: 1,
+        flex: 4,
         textAlign: "center",
         justifyContentnt: "space-evenly",
         marginTop: 2,
       },
 });
-//export default Courses({id: "string"});
+
 export default Courses;
 
 
 
-/*
-return (
-        <View>
-            <ScrollView>
-                <View style={styles.container}>
-                    {records.map((val) => {
-                        return (
-                            <View style={styles.item}>
-                                <Text> Id: {val.userId} 
-                                <Text>{'          '}</Text>
-                                Avance: {val.avance}</Text>
-                                <ItemDivider></ItemDivider>
-                            </View>
-                        
-                        );
-                    })}
-                    
-                </View>
-            </ScrollView>
-        </View>
-
-    );
-<View>
-            {records.map((val) => {
-                return <Text> {val.materiaId} {val.nombre}</Text>;
-            })}
-        </View>
-*/

@@ -143,6 +143,7 @@ export const GET_COURSES = gql`
         }
     }
 `;
+
 export const updateProfile = gql `
 mutation updateProfile($username:String!, $Email:String!, $Cel:Float!, $Tel:Float!, $Address:String!){
   updateProfile(username:$username, profile:{
@@ -159,3 +160,4 @@ mutation updateProfile($username:String!, $Email:String!, $Cel:Float!, $Tel:Floa
   }
 }
 `
+

@@ -1,45 +1,92 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useQuery, gql } from '@apollo/client';
-import { getAllAcademic, GETRECORD } from '../gql/queries';
+import { GETRECORD } from '../gql/queries';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from "jwt-decode";
 
 
 function Records() {
-    const { error, loading, data } = useQuery(getAllAcademic);
-    const id = "string";
-    /*
-    const {error2, loading2, data2} = useQuery(GETCOURSES, {
-        variables: { id: id }
+    const [username, setUsername] = useState("null");
+    const { loading, error, data } = useQuery(GETRECORD, {
+        variables: {
+            id: username
+        },
     });
-    */
-    const [records, setRecords] = useState([]);
-    const hpta = { ...data };
-    useEffect(() => {
-        if (data) {
-            //console.log(data.getAllAcademic);
-            setRecords(data.getAllAcademic);
+
+    const getData = async () => {
+        let decodedData
+        try {
+            const jsonValue = await AsyncStorage.getItem('@storage_Key').then(
+                (result) => {
+                    decodedData = result
+                }
+            )
+        } catch (e) {
+            console.log(e)
         }
 
-    }, [data]);
+        return jwt_decode(decodedData)
+    }
 
+    const jsonData = getData().then(
+        (decoded) => {
+            setUsername(decoded.userId);
+        }
+    )
+
+    if (username == undefined) {
+        return <Text>Cargando....</Text>
+    }
+
+    if (loading) {
+        return <Text>Obteniendo datos...</Text> //while loading return this
+    }
+
+    if (error) {
+        console.log(error)
+        return <Text>Error obteniendo los datos pero conecta</Text>
+    }
+
+    const DATA = data.getAcademic[0];
     return (
         <View>
             <ScrollView>
                 <View style={styles.container}>
-                    {records.map((val) => {
-                        return (
                             <View style={styles.item}>
-                                <Text style={styles.columnRow}> Semestre: {val.semestre} 
-                                <Text style={styles.columnRow}>{'          '}</Text>
-                                Avance: {val.avance}</Text>
+                                <Text style={styles.columnRow} > Creditos Inscritos: {DATA.creditosInscritos}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Creditos Aprobados: {DATA.creditosAprobados}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Creditos Pendientes: {DATA.creditosPendientes}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Creditos Cursados: {DATA.creditosCursados}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Creditos Cancelados: {DATA.creditosCancelados}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Papa: {DATA.papa}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Pa: {DATA.pa}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Pappi: {DATA.pappi}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Semestre: {DATA.semestre}</Text>
+                                <ItemDivider></ItemDivider>
+
+                                <Text style={styles.columnRow} > Avance: {DATA.avance}</Text>
                                 <ItemDivider></ItemDivider>
                             </View>
-                        
-                        );
-                    })}
-                    
                 </View>
             </ScrollView>
+
         </View>
 
     );
@@ -48,20 +95,26 @@ function Records() {
 
 const ItemDivider = () => {
     return (
-      <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: "#000000",
-          marginTop: 8,
-        }}
-      />
+        <View
+            style={{
+                height: 1,
+                width: "100%",
+                backgroundColor: "#000000",
+                marginTop: 8,
+            }}
+        />
     );
 }
 
 
 const styles = StyleSheet.create({
     container: {
+        padding: 20,
+        flex: 1,
+        backgroundColor: '#A61000',
+        borderRadius: 10,
+    },
+    container2: {
         padding: 20,
         flex: 1,
         backgroundColor: '#A61000',
@@ -74,10 +127,10 @@ const styles = StyleSheet.create({
     },
     columnRow: {
         flex: 1,
-        textAlign: "center",
+        textAlign: "left",
         justifyContent: "space-evenly",
-        marginTop: 2,
-      },
+        marginTop: 5,
+    },
 });
 
 export default Records;
