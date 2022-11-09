@@ -31,7 +31,7 @@ function Records() {
 
     const jsonData = getData().then(
         (decoded) => {
-            setUsername(decoded.userId);
+            setUsername(decoded.username);
         }
     )
 
