@@ -12,8 +12,7 @@ const Search = () => {
 
   return (
     <SafeAreaView style={styles.root}>
-      {!clicked && <Text style={styles.title}>Materias disponibles</Text>}
-
+      <Text style={styles.title}>Materias disponibles</Text>
       <SearchBar
         searchPhrase={searchPhrase}
         setSearchPhrase={setSearchPhrase}
@@ -29,10 +28,9 @@ export default Search;
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "#A9C2D9",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 140,
+    marginTop: 870,
     height: "70%"
   },
   title: {

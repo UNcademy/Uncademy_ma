@@ -14,8 +14,6 @@ function Courses() {
         },
     });
 
-    console.log(username)
-
     const getData = async () => {
         let decodedData
         try {
@@ -33,7 +31,6 @@ function Courses() {
     const jsonData = getData().then(
         (decoded) => {
             setUsername(decoded.username);
-            console.log(decoded.username)
         }
     )
 
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#A61000',
+        backgroundColor: '#A9C2D9',
         borderRadius: 10,
         textAlign:'center'
     },

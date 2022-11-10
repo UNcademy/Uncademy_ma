@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#A61000',
+        backgroundColor: '#A9C2D9',
         borderRadius: 10,
     },
     container2: {
         padding: 20,
         flex: 1,
-        backgroundColor: '#A61000',
+        backgroundColor: '#A9C2D9',
         borderRadius: 10,
     },
     item: {
